@@ -1,0 +1,33 @@
+﻿<Window x:Class="Adita.OpcUaClientServiceSample.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Adita.OpcUaClientServiceSample" d:DataContext="{d:DesignInstance Type=local:MainViewModel}"
+         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:behaviors="clr-namespace:Adita.OpcUaClientServiceSample.Behaviors"
+        xmlns:validations="clr-namespace:OpcUaClientServiceSample.Validations"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <StackPanel Margin="20">
+        <TextBlock Margin="0,0,0,20" TextWrapping="Wrap" Text="Value from server will be filled to following TextBox back property on start up, 
+also when value on server is changed at runtime it will notified this client and update the value of back property of following TextBox, following TextBox will updating source/back property 
+when enter key pressed and invoke CommitCommand to write value to the server."/>
+        <TextBlock Text="Press enter to write value!"/>
+        <TextBox Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+            <i:Interaction.Behaviors>
+                <behaviors:TextFieldNumericInputBehavior InputMode="FloatingPoint" IsPositiveOnly="True"/>
+                <behaviors:TextFieldBindingBehavior PreventInvokeCommandOnErrors="True" 
+                                                                        UpdateCommand="{Binding CommitCommand}"/>
+                <behaviors:TextFieldBlockTextOnFocusBehavior/>
+            </i:Interaction.Behaviors>
+            <TextBox.Text>
+                <Binding Path="Value1" UpdateSourceTrigger="Explicit" NotifyOnValidationError="True" StringFormat="N3">
+                    <Binding.ValidationRules>
+                        <validations:FloatingPointValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+    </StackPanel>
+</Window>
