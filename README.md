@@ -6,7 +6,7 @@ this sample also include :
 * TextBox update source & invoke command on enter key behavior
 * Validations including error template sample
 
-### **Adita** is our new namespace root, **Sans** will be depreceated.
+### *Adita* is our new namespace root, *Sans* will be depreceated.
 
 Highly recommended to use handler only for one *MonitoredItem.Notification* if need high speed notification for multiple MonitoredItems, that's the purpose of abstraction of *IMonitoredItemsContainer*.
 
